@@ -41,32 +41,6 @@ except Exception as e:
     print(f"**ERROR** starting Flask or the Webex API. Error message:\n{e}")
     sys.exit(-1)
 
-async def chatgpt(message):
-    api_url = "https://api.openai.com/v1/chat/completions"
-
-# Set the API key (replace YOUR_API_KEY with your actual API key)
-    token=""
-    api_key = "Bearer "+token
-
-# Set the request parameters
-    data = {
-    "model": "gpt-3.5-turbo",
-    "messages": [{"role": "user", "content": message}],
-    "temperature": 0.7
-    }
-
-# Set the request headers
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": api_key
-    }
-
-# Send the API request
-    response = requests.post(api_url, headers=headers, data=json.dumps(data))
-
-# Extract the response JSON content
-    response_data = response.json()
-    return response_data['choices'][0]['message']['content']
 
 def check_ngrok():
     try:
@@ -115,8 +89,6 @@ def process_message(message_obj):
         msg_result = api.messages.create(toPersonEmail=message_obj.personEmail, markdown="# Hello to you to!")
     else:
         print(f"___ OTHER message received: repeat message '{message_obj.text}'")
-        message_text = chatgpt(message_obj.text)
-        msg_result = api.messages.create(toPersonEmail=message_obj.personEmail, markdown="**You just said:** " + message_text)
         msg_result = api.messages.create(toPersonEmail=message_obj.personEmail, markdown="**You just said:** " + message_obj.text)
     return msg_result
 
