@@ -64,7 +64,7 @@ class WebexMessage(object):
         logging.info('>>> device does not exist, creating')
 
         resp = self.webex._session.post(DEVICES_URL, json=DEVICE_DATA)
-        print(resp)
+        #print(resp)
         if resp is None:
             logging.error('>>> **ERROR** could not create device')
         self.device_info = resp
