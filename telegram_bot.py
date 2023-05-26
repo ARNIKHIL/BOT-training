@@ -47,7 +47,8 @@ async def reply_to_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(chat_id=update.effective_chat.id, text=f"Response: \n {message_text}")
 
 if __name__ == '__main__':
-    application = ApplicationBuilder().token('6170948411:AAHyC1cXVY3udFMGHkY40xkP795jVXYSrvk').build()
+    token_string=""
+    application = ApplicationBuilder().token(token_string).build()
 
     start_handler = CommandHandler('start', start)
     application.add_handler(start_handler)
